@@ -1,10 +1,103 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
 namespace Rank48.Models
 {
-    public class Trainee
+    public partial class Trainee
     {
-        public Trainee()
-        {
-        }
+        [JsonProperty("spec")]
+        public string Spec { get; set; }
+
+        [JsonProperty("weight")]
+        public string Weight { get; set; }
+
+        [JsonProperty("bType")]
+        public string BloodType { get; set; }
+
+        [JsonProperty("drop")]
+        public bool IsDrop { get; set; }
+
+        [JsonProperty("hobby")]
+        public string Hobby { get; set; }
+
+        // is id of agency (string type)
+        [JsonProperty("agency")]
+        public string Agency { get; set; }
+
+        [JsonProperty("image")]
+        public string ImageUrl { get; set; }
+
+        [JsonProperty("period")]
+        public string Period { get; set; }
+
+        [JsonProperty("clips")]
+        public Clip[] Clips { get; set; }
+
+        [JsonProperty("mainImage")]
+        public string MainImageUrl { get; set; }
+
+        [JsonProperty("eName")]
+        public string EnglishName { get; set; }
+
+        [JsonProperty("photos")]
+        public Photo[] Photos { get; set; }
+
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("open")]
+        public bool IsOpen { get; set; }
+
+        // 각오 한마디
+        [JsonProperty("aWord")]
+        public string AWord { get; set; }
+
+        [JsonProperty("height")]
+        public string Height { get; set; }
+
+        [JsonProperty("nick")]
+        public string Nick { get; set; }
+
+        [JsonProperty("age")]
+        public string YearOfBirth { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("vods")]
+        public Clip[] Vods { get; set; }
+    }
+
+    public partial class Clip
+    {
+        [JsonProperty("CLIP_ID")]
+        public string ClipId { get; set; }
+
+        [JsonProperty("CLIP_TYPE_CD")]
+        public string ClipTypeCd { get; set; }
+
+        [JsonProperty("BROAD_YMD")]
+        public string BroadYmd { get; set; }
+
+        [JsonProperty("RUNNING_TIME")]
+        public DateTimeOffset RunningTime { get; set; }
+
+        [JsonProperty("CLIP_TITLE")]
+        public string ClipTitle { get; set; }
+
+        [JsonProperty("CLIP_INTRO")]
+        public string ClipIntro { get; set; }
+
+        [JsonProperty("IMG_URL")]
+        public string ImgUrl { get; set; }
+    }
+
+    public partial class Photo
+    {
+        [JsonProperty("photo")]
+        public string PhotoPhoto { get; set; }
     }
 }
