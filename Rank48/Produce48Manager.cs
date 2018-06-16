@@ -43,11 +43,11 @@ namespace Rank48
                     // parse json from js code
                     string[] temp = code.Split('\n');
                     string traineeJson = GetJson(temp[2]);
-                    string agencyJson = GetJson(temp[2]);
+                    string agencyJson = GetJson(temp[3]);
 
                     // deserialize
                     var trainees = JsonConvert.DeserializeObject<Dictionary<string, Trainee>>(traineeJson);
-                    var agencies = JsonConvert.DeserializeObject<Dictionary<string, Agency>>(agencyJson);
+                    var agencies = JsonConvert.DeserializeObject<Dictionary<string, Agency>>(agencyJson, Converter.Settings);
 
                     return (trainees, agencies);
                 }
