@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Rank48.Models
 {
-    public partial class Trainee
+    public class Trainee
     {
         [JsonProperty("spec")]
         public string Spec { get; set; }
@@ -33,7 +33,7 @@ namespace Rank48.Models
         public string Period { get; set; }
 
         [JsonProperty("clips")]
-        public Clip[] Clips { get; set; }
+        public Video[] Clips { get; set; }
 
         [JsonProperty("mainImage")]
         public string MainImageUrl { get; set; }
@@ -67,10 +67,15 @@ namespace Rank48.Models
         public string Name { get; set; }
 
         [JsonProperty("vods")]
-        public Clip[] Vods { get; set; }
+        public Video[] Vods { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
-    public partial class Clip
+    public class Video
     {
         [JsonProperty("CLIP_ID")]
         public string ClipId { get; set; }
@@ -94,7 +99,7 @@ namespace Rank48.Models
         public string ImageUrl { get; set; }
     }
 
-    public partial class Photo
+    public class Photo
     {
         [JsonProperty("photo")]
         public string Url { get; set; }

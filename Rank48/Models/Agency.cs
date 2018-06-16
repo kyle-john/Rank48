@@ -26,6 +26,11 @@ namespace Rank48.Models
 
         [JsonProperty("country")]
         public Country Country { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public enum Country { Japan, Korea };
