@@ -75,6 +75,15 @@ public partial class Trainee
 ```
 
 ```csharp
+string GetJson(string jsCode)
+{
+    int index = jsCode.IndexOf('=') + 1;
+    jsCode = jsCode.Substring(index);
+    return jsCode.Substring(0, jsCode.IndexOf(';'));
+}
+```
+
+```csharp
 using System.Net.Http;
 string url = "http://onairimg.mnet.com/data/od/mnettv/resources/js/mnettv/data/gen/produce48/trainee.js?v=1529082320726";
 using (var client = new HttpClient())
@@ -87,9 +96,7 @@ using (var response = await client.GetAsync(url))
         
         // parse json from js code
         js = js.Split('\n')[2];
-        int index = js.IndexOf('=') + 1;
-        js = js.Substring(index);
-        string json = js.Substring(0, js.IndexOf(';'));
+        string json = GetJson(js);
 
         // deserialize
         var ranking = JsonConvert.DeserializeObject<Dictionary<string, Trainee>>(json);
