@@ -23,9 +23,8 @@ namespace Rank48.Models
         [JsonProperty("hobby")]
         public string Hobby { get; set; }
 
-        // is id of agency (string type)
         [JsonProperty("agency")]
-        public string Agency { get; set; }
+        public string AgencyId { get; set; }
 
         [JsonProperty("image")]
         public string ImageUrl { get; set; }
@@ -92,12 +91,12 @@ namespace Rank48.Models
         public string ClipIntro { get; set; }
 
         [JsonProperty("IMG_URL")]
-        public string ImgUrl { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     public partial class Photo
     {
         [JsonProperty("photo")]
-        public string PhotoPhoto { get; set; }
+        public string Url { get; set; }
     }
 }
