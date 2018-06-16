@@ -3,3 +3,5 @@
 
 **PRODUCE 48**\
 당신의 소녀에게 투표하라
+
+![sample](sample.png)
