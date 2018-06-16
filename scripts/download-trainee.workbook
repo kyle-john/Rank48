@@ -1,0 +1,99 @@
+---
+packages:
+- id: Newtonsoft.Json
+  version: 11.0.2
+uti: com.xamarin.workbook
+id: ab2230e1-755e-4bc5-a1a3-41308d97803b
+title: download-trainee
+platforms:
+- DotNetCore
+---
+
+```csharp
+#r "Newtonsoft.Json"
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+```
+
+```csharp
+public partial class Trainee
+    {
+        [JsonProperty("spec")]
+        public string Spec { get; set; }
+
+        [JsonProperty("weight")]
+        public string Weight { get; set; }
+
+        [JsonProperty("bType")]
+        public string BloodType { get; set; }
+
+        [JsonProperty("drop")]
+        public bool IsDrop { get; set; }
+
+        [JsonProperty("hobby")]
+        public string Hobby { get; set; }
+
+        [JsonProperty("agency")]
+        public string AgencyId { get; set; }
+
+        [JsonProperty("image")]
+        public string ImageUrl { get; set; }
+
+        [JsonProperty("period")]
+        public string Period { get; set; }
+
+        [JsonProperty("mainImage")]
+        public string MainImageUrl { get; set; }
+
+        [JsonProperty("eName")]
+        public string EnglishName { get; set; }
+
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("open")]
+        public bool IsOpen { get; set; }
+
+        // 각오 한마디
+        [JsonProperty("aWord")]
+        public string AWord { get; set; }
+
+        [JsonProperty("height")]
+        public string Height { get; set; }
+
+        [JsonProperty("nick")]
+        public string Nick { get; set; }
+
+        [JsonProperty("age")]
+        public string YearOfBirth { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        public override string ToString() => Name;
+    }
+```
+
+```csharp
+using System.Net.Http;
+string url = "http://onairimg.mnet.com/data/od/mnettv/resources/js/mnettv/data/gen/produce48/trainee.js?v=1529082320726";
+using (var client = new HttpClient())
+using (var response = await client.GetAsync(url))
+{
+    if (response.IsSuccessStatusCode)
+    {
+        // read response
+        string js = await response.Content.ReadAsStringAsync();
+        
+        // parse json from js code
+        js = js.Split('\n')[2];
+        int index = js.IndexOf('=') + 1;
+        js = js.Substring(index);
+        string json = js.Substring(0, js.IndexOf(';'));
+
+        // deserialize
+        var ranking = JsonConvert.DeserializeObject<Dictionary<string, Trainee>>(json);
+        return ranking;
+    }
+}
+```

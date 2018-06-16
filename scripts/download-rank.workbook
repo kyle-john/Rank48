@@ -1,0 +1,85 @@
+---
+packages:
+- id: Newtonsoft.Json
+  version: 11.0.2
+uti: com.xamarin.workbook
+id: ab2230e1-755e-4bc5-a1a3-41308d97803b
+title: download-rank
+platforms:
+- DotNetCore
+---
+
+```csharp
+#r "Newtonsoft.Json"
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+```
+
+```csharp
+public partial class Ranking
+    {
+        [JsonProperty("ranks")]
+        public Rank[] Ranks { get; set; }
+
+        [JsonProperty("template")]
+        public string Template { get; set; }
+
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("count")]
+        public bool Count { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("active")]
+        public bool Active { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+
+    public partial class Rank
+    {
+        [JsonProperty("r")]
+        public string R { get; set; }
+
+        [JsonProperty("t")]
+        public string T { get; set; }
+
+        [JsonProperty("c")]
+        public string C { get; set; }
+
+        [JsonProperty("d")]
+        public bool D { get; set; }
+
+        [JsonProperty("dd")]
+        public string Dd { get; set; }
+    }
+```
+
+```csharp
+using System.Net.Http;
+string url = "http://onairimg.mnet.com/data/od/mnettv/resources/js/mnettv/data/gen/produce48/rank.js?v=1529082320726";
+using (var client = new HttpClient())
+using (var response = await client.GetAsync(url))
+{
+    if (response.IsSuccessStatusCode)
+    {
+        // read response
+        string js = await response.Content.ReadAsStringAsync();
+        
+        // parse json from js code
+        js = js.Split('\n')[2];
+        int index = js.IndexOf('=') + 1;
+        string json = js.Substring(index, js.Length - index - 1);
+        
+        // deserialize
+        var ranking = JsonConvert.DeserializeObject<Dictionary<string, Ranking>>(json);
+        return ranking;
+    }
+}
+```
