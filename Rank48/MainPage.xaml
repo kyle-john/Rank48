@@ -6,10 +6,6 @@
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="Rank48.MainPage"
              Title="Rank 48">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Refresh" Clicked="Handle_Clicked" />
-    </ContentPage.ToolbarItems>
-
     <StackLayout>
         <ListView x:Name="listView"
                   ItemSelected="Handle_ItemSelected"

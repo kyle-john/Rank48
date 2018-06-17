@@ -8,36 +8,36 @@ namespace Rank48
 {
     public partial class MainPage : ContentPage
     {
-        Task initTask;
-
         public MainPage()
         {
             InitializeComponent();
-
-            initTask = Task.Run(async () =>
-            {
-                await Produce48Manager.Instance.InitializeAsync();
-            });
+            OnCreate();
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+        async void OnCreate()
         {
-            await initTask;
-
             var manager = Produce48Manager.Instance;
+
+            listView.IsRefreshing = true;
+
+            await Task.Run(async () =>
+            {
+                await manager.InitializeAsync();
+            });
             var week1Rank = manager.Ranking["1"].Ranks;
             listView.ItemsSource = week1Rank;
+
+            listView.IsRefreshing = false;
         }
 
         void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var listView = sender as ListView;
             listView.SelectedItem = null;
 
             if (e.SelectedItem is Rank rank)
             {
                 var trainee = rank.Trainee;
-                DisplayAlert("", trainee.Name, "OK");
+                DisplayAlert(trainee.Name, trainee.AWord, "OK");
             }
         }
     }

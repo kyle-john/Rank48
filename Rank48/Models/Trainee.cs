@@ -53,8 +53,16 @@ namespace Rank48.Models
         public bool IsOpen { get; set; }
 
         // 각오 한마디
+        string aword;
         [JsonProperty("aWord")]
-        public string AWord { get; set; }
+        public string AWord 
+        { 
+            get => aword; 
+            set 
+            {
+                aword = value.Replace("<br> ", "\n");
+            }
+        }
 
         [JsonProperty("height")]
         public string Height { get; set; }
