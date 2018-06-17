@@ -28,8 +28,6 @@ namespace Rank48.Models
 
         public Agency Agency { get => Produce48Manager.Instance.Agencies[AgencyId]; }
 
-        public string AgencyName => Agency.Name;
-
         [JsonProperty("image")]
         public string ImageUrl { get; set; }
 

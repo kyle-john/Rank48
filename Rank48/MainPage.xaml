@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Rank48"
+             xmlns:cell="clr-namespace:Rank48.Cells"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="Rank48.MainPage"
              Title="Rank 48">
     <ContentPage.ToolbarItems>
@@ -9,12 +11,13 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView x:Name="listView">
+        <ListView x:Name="listView"
+                  ItemSelected="Handle_ItemSelected"
+                  CachingStrategy="RecycleElement"
+                  android:ListView.IsFastScrollEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ImageCell Text="{Binding Name}"
-                               Detail="{Binding AgencyName}"
-                               ImageSource="{Binding ImageUrl}"/>
+                    <cell:TraineeCell />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

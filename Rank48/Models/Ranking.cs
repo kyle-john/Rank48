@@ -37,6 +37,8 @@ namespace Rank48.Models
         [JsonProperty("t")]
         public string TraineeId { get; set; }
 
+        public Trainee Trainee { get => Produce48Manager.Instance.Trainees[TraineeId]; }
+
         //[JsonProperty("c")]
         //public string C { get; set; }
 

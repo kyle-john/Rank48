@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:local="clr-namespace:Rank48.Cells"
+          xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+          x:Class="Rank48.Cells.TraineeCell">
+   <StackLayout Orientation="Horizontal"
+                Margin="5,0,0,0"
+                CompressedLayout.IsHeadless="true">
+        <Label x:Name="rankLabel"
+               TextColor="#ff50a1"
+               FontSize="Large"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="Center"
+               WidthRequest="30"/>
+        <ff:CachedImage x:Name="image"
+                        LoadingPlaceholder="{x:Static local:TraineeCell.Placeholder}"/>
+        <StackLayout Orientation="Vertical"
+                     Spacing="0">
+            <Label x:Name="nameLabel"
+                   TextColor="Black"
+                   FontSize="Medium"
+                   VerticalOptions="Start"/>
+            <Label x:Name="agencyLabel" 
+                   VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+    </StackLayout>
+</ViewCell>

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rank48.Models;
 using Xamarin.Forms;
 
 namespace Rank48
@@ -22,7 +23,22 @@ namespace Rank48
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
             await initTask;
-            listView.ItemsSource = Produce48Manager.Instance.Trainees.Values;
+
+            var manager = Produce48Manager.Instance;
+            var week1Rank = manager.Ranking["1"].Ranks;
+            listView.ItemsSource = week1Rank;
+        }
+
+        void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var listView = sender as ListView;
+            listView.SelectedItem = null;
+
+            if (e.SelectedItem is Rank rank)
+            {
+                var trainee = rank.Trainee;
+                DisplayAlert("", trainee.Name, "OK");
+            }
         }
     }
 }

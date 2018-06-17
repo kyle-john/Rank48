@@ -139,6 +139,8 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\placeholder.imageset\placeholder.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -157,5 +159,8 @@
       <Project>{D159F40E-E29A-457C-9C49-EC59FBF97C44}</Project>
       <Name>Rank48</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\placeholder.imageset\" />
   </ItemGroup>
 </Project>
