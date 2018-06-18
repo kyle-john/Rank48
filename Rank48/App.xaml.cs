@@ -3,6 +3,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Rank48
@@ -29,6 +32,9 @@ namespace Rank48
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start("android=7d4507fa-7214-4dcf-8513-59cf2820909e;" 
+                            + "ios=51b747aa-ec3e-4877-9401-7186a6b2cfff", 
+                            typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
