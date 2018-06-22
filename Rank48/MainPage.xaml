@@ -8,6 +8,7 @@
              Title="Rank 48">
     <StackLayout Orientation="Vertical">
         <Picker x:Name="picker"
+                Title="Select the week you want."
                 HorizontalOptions="Fill"
                 SelectedIndexChanged="Handle_SelectedIndexChanged" />
         <ListView x:Name="listView"

@@ -9,8 +9,12 @@ namespace Rank48
 {
     public partial class MainPage : ContentPage
     {
+        public static MainPage Instance { get; private set; }
+
         public MainPage()
         {
+            Instance = this;
+
             InitializeComponent();
             OnCreate();
 
@@ -19,6 +23,8 @@ namespace Rank48
                 StringFormat = "Week {0}"
             };
         }
+
+        public string CurrentWeek => picker.SelectedItem as string;
 
         async void OnCreate()
         {
@@ -45,12 +51,7 @@ namespace Rank48
             if (e.SelectedItem is Rank rank)
             {
                 var trainee = rank.Trainee;
-
-                string week = picker.SelectedItem as string;
-                int ranking = trainee.GetRankingUpdatedCount(week);
-                string text = ranking > 0 ? $"+{ranking}" : ranking.ToString();
-
-                DisplayAlert(trainee.Name, /*trainee.AWord*/text, "OK");
+                DisplayAlert(trainee.Name, trainee.AWord, "OK");
             }
         }
 
