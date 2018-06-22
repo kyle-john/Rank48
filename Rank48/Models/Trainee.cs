@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -82,6 +83,36 @@ namespace Rank48.Models
         public override string ToString()
         {
             return Name;
+        }
+
+        Dictionary<string, int> rankings;
+        public Dictionary<string, int> GetRankings() 
+        {
+            if (rankings == null)
+            { 
+                var manager = Produce48Manager.Instance;
+
+                var ranks = (from x in manager.Ranking
+                            select (key: x.Key, ranking: x.Value.Ranks.First(y => y.TraineeId == Id).Ranking))
+                           .ToDictionary(x => x.key, x => x.ranking);
+                
+                rankings = ranks;
+            }
+
+            return rankings;
+        }
+
+        public int GetRankingUpdatedCount(string week)
+        {
+            var ranks = GetRankings();
+
+            if (week == "1")
+                return 0;
+
+            int previous = ranks[$"{int.Parse(week) - 1}"];
+            int current = ranks[week];
+
+            return previous - current;
         }
     }
 

@@ -6,7 +6,10 @@
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="Rank48.MainPage"
              Title="Rank 48">
-    <StackLayout>
+    <StackLayout Orientation="Vertical">
+        <Picker x:Name="picker"
+                HorizontalOptions="Fill"
+                SelectedIndexChanged="Handle_SelectedIndexChanged" />
         <ListView x:Name="listView"
                   ItemSelected="Handle_ItemSelected"
                   CachingStrategy="RecycleElement"

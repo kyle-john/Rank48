@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Rank48.Models;
@@ -12,6 +13,11 @@ namespace Rank48
         {
             InitializeComponent();
             OnCreate();
+
+            picker.ItemDisplayBinding = new Binding
+            {
+                StringFormat = "Week {0}"
+            };
         }
 
         async void OnCreate()
@@ -24,10 +30,12 @@ namespace Rank48
             {
                 await manager.InitializeAsync();
             });
-            var week1Rank = manager.Ranking["1"].Ranks;
-            listView.ItemsSource = week1Rank;
 
             listView.IsRefreshing = false;
+
+            var weeks = manager.Ranking.Keys.ToList();
+            picker.ItemsSource = weeks;
+            picker.SelectedIndex = 0;
         }
 
         void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -37,8 +45,23 @@ namespace Rank48
             if (e.SelectedItem is Rank rank)
             {
                 var trainee = rank.Trainee;
-                DisplayAlert(trainee.Name, trainee.AWord, "OK");
+
+                string week = picker.SelectedItem as string;
+                int ranking = trainee.GetRankingUpdatedCount(week);
+                string text = ranking > 0 ? $"+{ranking}" : ranking.ToString();
+
+                DisplayAlert(trainee.Name, /*trainee.AWord*/text, "OK");
             }
+        }
+
+        void Handle_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            var manager = Produce48Manager.Instance;
+
+            var item = manager.Ranking[picker.SelectedItem as string];
+            var ranks = item.Ranks;
+
+            listView.ItemsSource = ranks;
         }
     }
 }
